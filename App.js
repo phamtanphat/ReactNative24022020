@@ -2,12 +2,13 @@
 import React, {Component} from 'react';
 import {View, StyleSheet} from 'react-native';
 import Button from './src/common/Button';
+import ImageView from './src/common/ImageView';
 
 export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Button text="Alert" styleBox={{backgroundColor: 'cyan', padding: 100}} />
+        <ImageView />
       </View>
     );
   }
