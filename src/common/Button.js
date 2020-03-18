@@ -1,18 +1,19 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
-
 export default class Button extends Component {
   checkRenderTextTitle() {
-    if (this.props.text) {
-      return this.props.text;
-    } else {
-      return '';
-    }
+    return this.props.text ? this.props.text : '';
   }
   render() {
     return (
       <TouchableOpacity
-        style={{backgroundColor: 'gray', padding: 10, borderRadius: 5}}>
+        style={{
+          backgroundColor: 'gray',
+          padding: 10,
+          borderRadius: 5,
+          ...this.props.styleBox,
+        }}>
         <Text style={{color: 'white', fontSize: 15, fontWeight: 'bold'}}>
           {this.checkRenderTextTitle()}
         </Text>
