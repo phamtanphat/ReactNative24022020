@@ -4,16 +4,16 @@ import {View, StyleSheet} from 'react-native';
 import Word from './src/Word';
 
 const words = [
-  {id: '1', en: 'One', vn: 'Mot'},
-  {id: '2', en: 'Two', vn: 'Hai'},
-  {id: '3', en: 'Three', vn: 'Ba'},
-  {id: '4', en: 'Four', vn: 'Bon'},
-  {id: '5', en: 'Five', vn: 'Nam'},
-  {id: '6', en: 'Six', vn: 'Sau'},
-  {id: '7', en: 'Seven', vn: 'Bay'},
-  {id: '8', en: 'Eight', vn: 'Tam'},
-  {id: '9', en: 'Nine', vn: 'Chin'},
-  {id: '10', en: 'Ten', vn: 'Muoi'},
+  {id: '1', en: 'One', vn: 'Mot', isMemorized: true},
+  {id: '2', en: 'Two', vn: 'Hai', isMemorized: false},
+  {id: '3', en: 'Three', vn: 'Ba', isMemorized: false},
+  {id: '4', en: 'Four', vn: 'Bon', isMemorized: false},
+  {id: '5', en: 'Five', vn: 'Nam', isMemorized: false},
+  {id: '6', en: 'Six', vn: 'Sau', isMemorized: true},
+  {id: '7', en: 'Seven', vn: 'Bay', isMemorized: false},
+  {id: '8', en: 'Eight', vn: 'Tam', isMemorized: true},
+  {id: '9', en: 'Nine', vn: 'Chin', isMemorized: false},
+  {id: '10', en: 'Ten', vn: 'Muoi', isMemorized: true},
 ];
 export default class App extends Component {
   render() {

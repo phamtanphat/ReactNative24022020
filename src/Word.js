@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, StyleSheet} from 'react-native';
 
 export default class Word extends Component {
   render() {
@@ -9,10 +9,17 @@ export default class Word extends Component {
     // cach 2 dung destructuring
     const {en, vn} = this.props.word;
     return (
-      <View style={{flexDirection: 'row'}}>
-        <Text> {en} </Text>
-        <Text> {vn} </Text>
+      <View style={styles.container}>
+        <Text style={{color: '#27A744' , fontSize : 20 }}> {en} </Text>
+        <Text style={{color: '#DC3545' , fontSize : 20 }}> {vn} </Text>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+});
