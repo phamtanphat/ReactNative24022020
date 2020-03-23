@@ -2,6 +2,8 @@
 import React, {Component} from 'react';
 import {View, StyleSheet, ScrollView} from 'react-native';
 import Word from './src/Word';
+import Box from './src/Box';
+
 
 const words = [
   {id: '1', en: 'One', vn: 'Mot', isMemorized: true},
@@ -19,11 +21,12 @@ export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        {/* <ScrollView showsVerticalScrollIndicator={false}>
           {words.map(word => (
             <Word word={word} key={word.en} />
           ))}
-        </ScrollView>
+        </ScrollView> */}
+        <Box />
       </View>
     );
   }
