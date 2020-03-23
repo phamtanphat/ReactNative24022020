@@ -34,6 +34,10 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'space-between',
     marginVertical: 10,
+    borderRadius: 10,
+    backgroundColor: 'gainsboro',
+    paddingVertical: 10,
+    marginHorizontal: 20,
   },
   groupText: {
     flexDirection: 'row',

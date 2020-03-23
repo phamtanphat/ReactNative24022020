@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, ScrollView} from 'react-native';
 import Word from './src/Word';
 
 const words = [
@@ -19,9 +19,11 @@ export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {words.map(word => (
-          <Word word={word} key={word.en} />
-        ))}
+        <ScrollView showsVerticalScrollIndicator={false}>
+          {words.map(word => (
+            <Word word={word} key={word.en} />
+          ))}
+        </ScrollView>
       </View>
     );
   }
