@@ -13,6 +13,15 @@ export default class Box extends Component {
   UNSAFE_componentWillMount() {
     console.log('UNSAFE_componentWillMount');
   }
+  increase = () => {
+    this.setState({count: this.state.count + 1});
+  };
+  decrease = () => {
+    this.setState({count: this.state.count - 1});
+  };
+  reset = () => {
+    this.setState({count: 0});
+  };
   render() {
     console.log('render');
     return (
@@ -33,24 +42,24 @@ export default class Box extends Component {
             justifyContent: 'space-evenly',
           }}>
           <TouchableOpacity
-            onPress={() => {
-                this.setState({count : this.state.count + 1}, () => {
-                    alert(JSON.stringify(this.state.count));
-                });
-            }}
+            onPress={this.increase}
             style={{backgroundColor: 'green', padding: 10}}>
             <Text
               style={{color: 'white', fontStyle: 'italic', fontWeight: 'bold'}}>
               Increase
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{backgroundColor: 'red', padding: 10}}>
+          <TouchableOpacity
+            onPress={this.decrease}
+            style={{backgroundColor: 'red', padding: 10}}>
             <Text
               style={{color: 'white', fontStyle: 'italic', fontWeight: 'bold'}}>
               Decrease
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{backgroundColor: 'slategray', padding: 10}}>
+          <TouchableOpacity
+            onPress={this.reset}
+            style={{backgroundColor: 'slategray', padding: 10}}>
             <Text
               style={{color: 'white', fontStyle: 'italic', fontWeight: 'bold'}}>
               Reset
