@@ -3,7 +3,19 @@ import React, {Component} from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
 
 export default class Box extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0,
+    };
+    console.log('Constructor');
+  }
+  UNSAFE_componentWillMount() {
+    console.log('UNSAFE_componentWillMount');
+  }
   render() {
+    console.log('render');
+    let count = 0;
     return (
       <View
         style={{
@@ -13,7 +25,7 @@ export default class Box extends Component {
           alignItems: 'center',
         }}>
         <Text style={{color: 'red', fontSize: 40}}>
-          Count : {this.props.count}
+          Count : {this.state.count}
         </Text>
         <View
           style={{
@@ -21,7 +33,12 @@ export default class Box extends Component {
             flexDirection: 'row',
             justifyContent: 'space-evenly',
           }}>
-          <TouchableOpacity style={{backgroundColor: 'green', padding: 10}}>
+          <TouchableOpacity
+            onPress={function() {
+              count = count + 1;
+              alert(count);
+            }}
+            style={{backgroundColor: 'green', padding: 10}}>
             <Text
               style={{color: 'white', fontStyle: 'italic', fontWeight: 'bold'}}>
               Increase
@@ -42,5 +59,8 @@ export default class Box extends Component {
         </View>
       </View>
     );
+  }
+  componentDidMount() {
+    console.log('componentDidMount');
   }
 }
