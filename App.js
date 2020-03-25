@@ -5,13 +5,15 @@ import Word from './src/Word';
 import Box from './src/Box';
 import List from './src/List';
 import MyFlatlist from './src/MyFlatlist';
+import Form from './src/Form';
 
 export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <List />
+        {/* <List /> */}
         {/* <MyFlatlist /> */}
+        <Form/>
       </View>
     );
   }
