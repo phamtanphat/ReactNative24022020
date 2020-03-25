@@ -4,14 +4,16 @@ import {View, StyleSheet, ScrollView} from 'react-native';
 import Word from './src/Word';
 import Box from './src/Box';
 import List from './src/List';
+import MyFlatlist from './src/MyFlatlist';
 
 export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        {/* <ScrollView showsVerticalScrollIndicator={false}>
           <List />
-        </ScrollView>
+        </ScrollView> */}
+        <MyFlatlist />
       </View>
     );
   }
