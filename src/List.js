@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
 
 export default class List extends Component {
   constructor(props) {
@@ -32,35 +32,41 @@ export default class List extends Component {
     const newWords = this.state.words.filter(item => item.id !== id);
     this.setState({words: newWords});
   };
+  renderItemFlatlist = item => {
+    return (
+      <View style={styles.containerGroupWord} key={item.id}>
+        <View style={styles.groupText}>
+          <Text style={styles.textEn}>{item.en}</Text>
+          <Text style={styles.textVn}>
+            {item.isMemorized ? '----' : item.vn}
+          </Text>
+        </View>
+        <View style={styles.groupButton}>
+          <TouchableOpacity
+            onPress={() => this.toggleMemorized(item.id)}
+            style={styles.buttonMemorized(item.isMemorized)}>
+            <Text style={styles.textMemorized}>
+              {item.isMemorized ? 'Forgot' : 'Memorized'}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => this.removeWord(item.id)}
+            style={styles.buttonRemove}>
+            <Text style={styles.textRemove}>Remove</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  };
   render() {
     return (
       <View style={styles.container}>
-        {this.state.words.map(word => {
-          return (
-            <View style={styles.containerGroupWord} key={word.id}>
-              <View style={styles.groupText}>
-                <Text style={styles.textEn}>{word.en}</Text>
-                <Text style={styles.textVn}>
-                  {word.isMemorized ? '----' : word.vn}
-                </Text>
-              </View>
-              <View style={styles.groupButton}>
-                <TouchableOpacity
-                  onPress={() => this.toggleMemorized(word.id)}
-                  style={styles.buttonMemorized(word.isMemorized)}>
-                  <Text style={styles.textMemorized}>
-                    {word.isMemorized ? 'Forgot' : 'Memorized'}
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => this.removeWord(word.id)}
-                  style={styles.buttonRemove}>
-                  <Text style={styles.textRemove}>Remove</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          );
-        })}
+        <FlatList
+          data={this.state.words}
+          renderItem={({item}) => this.renderItemFlatlist(item)}
+          keyExtractor={item => item.id}
+          extraData={this.state.words}
+        />
       </View>
     );
   }
