@@ -1,9 +1,18 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  FlatList,
+  TextInput,
+} from 'react-native';
 
 export default class List extends Component {
   constructor(props) {
     super(props);
+    this.txtEn = '';
+    this.txtVn = '';
     this.state = {
       words: [
         {id: '1', en: 'One', vn: 'Mot', isMemorized: true},
@@ -17,6 +26,7 @@ export default class List extends Component {
         {id: '9', en: 'Nine', vn: 'Chin', isMemorized: false},
         {id: '10', en: 'Ten', vn: 'Muoi', isMemorized: true},
       ],
+      shouldShowform: false,
     };
   }
   toggleMemorized = id => {
@@ -58,10 +68,55 @@ export default class List extends Component {
       </View>
     );
   };
+  toggleForm = () => {
+    this.setState({shouldShowform: !this.state.shouldShowform});
+  };
+  renderForm = () => {
+    if (this.state.shouldShowform) {
+      return (
+        <View>
+          <TextInput
+            style={styles.textStyleEn}
+            placeholder="English"
+            onChangeText={text => (this.txtEn = text)}
+          />
+          <TextInput
+            style={styles.textStyleVn}
+            placeholder="Vietnamese"
+            onChangeText={text => (this.txtVn = text)}
+          />
+          <View style={styles.containerButtonForm}>
+            <TouchableOpacity
+              onPress={() => {
+                console.log(this.txtEn, this.txtVn);
+              }}
+              style={styles.backgroudAddWord}>
+              <Text style={styles.textTouchableAddWord}>Add word</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.toggleForm()}
+              style={styles.backgroudCancel}>
+              <Text style={styles.textTouchableCancel}>Cancel</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      );
+    } else {
+      return (
+        <TouchableOpacity
+          onPress={() => this.toggleForm()}
+          style={styles.backgroudPlus}>
+          <Text style={styles.textPlus}>+</Text>
+        </TouchableOpacity>
+      );
+    }
+  };
   render() {
     return (
       <View style={styles.container}>
         <FlatList
+          ListHeaderComponentStyle={styles.backgroundHeader}
+          ListHeaderComponent={this.renderForm}
           data={this.state.words}
           renderItem={({item}) => this.renderItemFlatlist(item)}
           keyExtractor={item => item.id}
@@ -118,5 +173,60 @@ const styles = StyleSheet.create({
   textRemove: {
     color: '#ffffff',
     fontSize: 20,
+  },
+  textStyleEn: {
+    height: 50,
+    borderColor: 'black',
+    borderWidth: 1,
+    margin: 10,
+    fontSize: 20,
+    paddingHorizontal: 20,
+  },
+  textStyleVn: {
+    height: 50,
+    borderColor: 'black',
+    borderWidth: 1,
+    margin: 10,
+    fontSize: 20,
+    paddingHorizontal: 20,
+  },
+  containerButtonForm: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 20,
+  },
+  backgroudAddWord: {
+    backgroundColor: '#28a745',
+    padding: 15,
+    borderRadius: 8,
+  },
+  textTouchableAddWord: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  backgroudCancel: {
+    backgroundColor: 'red',
+    padding: 15,
+    borderRadius: 8,
+  },
+  textTouchableCancel: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  backgroudPlus: {
+    marginHorizontal: 20,
+    paddingVertical: 15,
+    backgroundColor: '#28a745',
+    alignItems: 'center',
+    borderRadius: 5,
+  },
+  textPlus: {
+    color: 'white',
+    fontSize: 20,
+  },
+  backgroundHeader: {
+    marginTop: 10,
   },
 });
