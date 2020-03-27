@@ -71,6 +71,24 @@ export default class List extends Component {
   toggleForm = () => {
     this.setState({shouldShowform: !this.state.shouldShowform});
   };
+  addword = () => {
+    const newWord = {
+      id: this.state.words.length + 1 + '',
+      en: this.txtEn,
+      vn: this.txtVn,
+      isMemorized: false,
+    };
+    const newWords = this.state.words.concat(newWord);
+    this.txtVn = '';
+    this.txtEn = '';
+    this.setState({words: newWords, shouldShowform: false}, () => {
+      const length = this.state.words.length;
+      this.flatlist.scrollToIndex({
+        animated: true,
+        index: length - 2 + '',
+      });
+    });
+  };
   renderForm = () => {
     if (this.state.shouldShowform) {
       return (
@@ -87,9 +105,7 @@ export default class List extends Component {
           />
           <View style={styles.containerButtonForm}>
             <TouchableOpacity
-              onPress={() => {
-                console.log(this.txtEn, this.txtVn);
-              }}
+              onPress={this.addword}
               style={styles.backgroudAddWord}>
               <Text style={styles.textTouchableAddWord}>Add word</Text>
             </TouchableOpacity>
@@ -115,6 +131,9 @@ export default class List extends Component {
     return (
       <View style={styles.container}>
         <FlatList
+          ref={ref => {
+            this.flatlist = ref;
+          }}
           ListHeaderComponentStyle={styles.backgroundHeader}
           ListHeaderComponent={this.renderForm}
           data={this.state.words}
