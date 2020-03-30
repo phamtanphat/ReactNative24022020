@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   FlatList,
   TextInput,
+  Picker,
 } from 'react-native';
 
 export default class List extends Component {
@@ -27,6 +28,7 @@ export default class List extends Component {
         {id: '10', en: 'Ten', vn: 'Muoi', isMemorized: true},
       ],
       shouldShowform: false,
+      filterMode: 'Show_All',
     };
   }
   toggleMemorized = id => {
@@ -122,6 +124,25 @@ export default class List extends Component {
       );
     }
   };
+  renderHeader = () => {
+    return (
+      <View>
+        {this.renderForm()}
+        <View style={styles.containerPickerStyle}>
+          <Picker
+            selectedValue={this.state.filteMode}
+            style={styles.pickerStyle}
+            onValueChange={itemValue => {
+              this.setState({filteMode: itemValue});
+            }}>
+            <Picker.Item label="Show All" value="Show_All" />
+            <Picker.Item label="Show Forgot" value="Show_Forgot" />
+            <Picker.Item label="Show Memorized" value="Show_Memorized" />
+          </Picker>
+        </View>
+      </View>
+    );
+  };
   render() {
     return (
       <View style={styles.container}>
@@ -130,7 +151,7 @@ export default class List extends Component {
             this.flatlist = ref;
           }}
           ListHeaderComponentStyle={styles.backgroundHeader}
-          ListHeaderComponent={this.renderForm}
+          ListHeaderComponent={this.renderHeader}
           data={this.state.words}
           renderItem={({item}) => this.renderItemFlatlist(item)}
           keyExtractor={item => item.id}
@@ -243,4 +264,14 @@ const styles = StyleSheet.create({
   backgroundHeader: {
     marginTop: 10,
   },
+  containerPickerStyle:{
+    borderWidth : 1 ,
+    borderRadius: 1, 
+    borderColor: 'black', 
+    marginHorizontal : 20 , 
+    marginVertical : 10
+  },
+  pickerStyle: {
+    height: 50
+  }
 });
