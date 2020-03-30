@@ -1,6 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
+import Child from './Child';
 
 export default class Box extends Component {
   constructor(props) {
@@ -10,20 +11,16 @@ export default class Box extends Component {
     };
     console.log('Constructor');
   }
-  UNSAFE_componentWillMount() {
-    console.log('UNSAFE_componentWillMount');
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('shouldComponentUpdate');
+    return true;
   }
-  increase = () => {
-    this.setState({count: this.state.count + 1});
-  };
-  decrease = () => {
-    this.setState({count: this.state.count - 1});
-  };
-  reset = () => {
-    this.setState({count: 0});
-  };
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    console.log(prevState);
+    console.log('getSnapshotBeforeUpdate');
+  }
   render() {
-    console.log('render');
+    console.log('render Box');
     return (
       <View
         style={{
@@ -32,44 +29,18 @@ export default class Box extends Component {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <Text style={{color: 'red', fontSize: 40}}>
-          Count : {this.state.count}
-        </Text>
-        <View
-          style={{
-            width: '100%',
-            flexDirection: 'row',
-            justifyContent: 'space-evenly',
-          }}>
-          <TouchableOpacity
-            onPress={this.increase}
-            style={{backgroundColor: 'green', padding: 10}}>
-            <Text
-              style={{color: 'white', fontStyle: 'italic', fontWeight: 'bold'}}>
-              Increase
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={this.decrease}
-            style={{backgroundColor: 'red', padding: 10}}>
-            <Text
-              style={{color: 'white', fontStyle: 'italic', fontWeight: 'bold'}}>
-              Decrease
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={this.reset}
-            style={{backgroundColor: 'slategray', padding: 10}}>
-            <Text
-              style={{color: 'white', fontStyle: 'italic', fontWeight: 'bold'}}>
-              Reset
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          onPress={() => this.setState({count: this.state.count + 1})}>
+          <Text style={{color: 'red', fontSize: 40}}>
+            Count : {this.state.count}
+          </Text>
+        </TouchableOpacity>
+
+        <Child />
       </View>
     );
   }
-  componentDidMount() {
-    console.log('componentDidMount');
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log('componentDidUpdate');
   }
 }

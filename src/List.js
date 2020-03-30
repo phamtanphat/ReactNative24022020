@@ -1,9 +1,5 @@
 import React, {Component} from 'react';
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-} from 'react-native';
+import {StyleSheet, ScrollView} from 'react-native';
 import Word from './Word';
 import Filter from './Filter';
 import Form from './Form';
