@@ -45,6 +45,11 @@ export default class List extends Component {
     this.setState({words: newWords});
   };
   renderItemFlatlist = item => {
+    if (this.state.filterMode === 'Show_Forgot' && !item.isMemorized) {
+      return null;
+    } else if (this.state.filterMode === 'Show_Memorized' && item.isMemorized) {
+      return null;
+    }
     return (
       <View style={styles.containerGroupWord} key={item.id}>
         <View style={styles.groupText}>
@@ -130,10 +135,10 @@ export default class List extends Component {
         {this.renderForm()}
         <View style={styles.containerPickerStyle}>
           <Picker
-            selectedValue={this.state.filteMode}
+            selectedValue={this.state.filterMode}
             style={styles.pickerStyle}
             onValueChange={itemValue => {
-              this.setState({filteMode: itemValue});
+              this.setState({filterMode: itemValue});
             }}>
             <Picker.Item label="Show All" value="Show_All" />
             <Picker.Item label="Show Forgot" value="Show_Forgot" />
@@ -155,7 +160,7 @@ export default class List extends Component {
           data={this.state.words}
           renderItem={({item}) => this.renderItemFlatlist(item)}
           keyExtractor={item => item.id}
-          extraData={this.state.words}
+          extraData={this.state}
         />
       </View>
     );
@@ -264,14 +269,14 @@ const styles = StyleSheet.create({
   backgroundHeader: {
     marginTop: 10,
   },
-  containerPickerStyle:{
-    borderWidth : 1 ,
-    borderRadius: 1, 
-    borderColor: 'black', 
-    marginHorizontal : 20 , 
-    marginVertical : 10
+  containerPickerStyle: {
+    borderWidth: 1,
+    borderRadius: 1,
+    borderColor: 'black',
+    marginHorizontal: 20,
+    marginVertical: 10,
   },
   pickerStyle: {
-    height: 50
-  }
+    height: 50,
+  },
 });
