@@ -6,76 +6,38 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  StyleSheet,
 } from 'react-native';
 export default class Form extends Component {
   constructor(props) {
     super(props);
     this.txtEn = '';
     this.txtVn = '';
-    this.state = {
-      shouldShowform: false,
-    };
   }
-  toggleForm = () => {
-    this.setState({shouldShowform: !this.state.shouldShowform});
-  };
   renderForm = () => {
-    if (this.state.shouldShowform) {
+    if (this.props.shouldShowform) {
       return (
         <View>
           <TextInput
-            style={{
-              height: 50,
-              borderColor: 'black',
-              borderWidth: 1,
-              margin: 10,
-              fontSize: 20,
-              paddingHorizontal: 20,
-            }}
+            style={styles.textStyleEn}
             placeholder="English"
             onChangeText={text => (this.txtEn = text)}
           />
           <TextInput
-            style={{
-              height: 50,
-              borderColor: 'black',
-              borderWidth: 1,
-              margin: 10,
-              fontSize: 20,
-              paddingHorizontal: 20,
-            }}
+            style={styles.textStyleVn}
             placeholder="Vietnamese"
             onChangeText={text => (this.txtVn = text)}
           />
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-              marginTop: 20,
-            }}>
+          <View style={styles.containerButtonForm}>
             <TouchableOpacity
-              onPress={() => {
-                console.log(this.txtEn, this.txtVn);
-              }}
-              style={{
-                backgroundColor: '#28a745',
-                padding: 15,
-                borderRadius: 8,
-              }}>
-              <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>
-                Add word
-              </Text>
+              onPress={this.addword}
+              style={styles.backgroudAddWord}>
+              <Text style={styles.textTouchableAddWord}>Add word</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => this.toggleForm()}
-              style={{
-                backgroundColor: 'red',
-                padding: 15,
-                borderRadius: 8,
-              }}>
-              <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>
-                Cancel
-              </Text>
+              style={styles.backgroudCancel}>
+              <Text style={styles.textTouchableCancel}>Cancel</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -84,20 +46,8 @@ export default class Form extends Component {
       return (
         <TouchableOpacity
           onPress={() => this.toggleForm()}
-          style={{
-            marginHorizontal: 20,
-            paddingVertical: 15,
-            backgroundColor: '#28a745',
-            alignItems: 'center',
-            borderRadius: 5,
-          }}>
-          <Text
-            style={{
-              color: 'white',
-              fontSize: 20,
-            }}>
-            +
-          </Text>
+          style={styles.backgroudPlus}>
+          <Text style={styles.textPlus}>+</Text>
         </TouchableOpacity>
       );
     }
@@ -110,3 +60,61 @@ export default class Form extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  containerButtonForm: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 20,
+  },
+  backgroudAddWord: {
+    backgroundColor: '#28a745',
+    padding: 15,
+    borderRadius: 8,
+  },
+  textTouchableAddWord: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  backgroudCancel: {
+    backgroundColor: 'red',
+    padding: 15,
+    borderRadius: 8,
+  },
+  textTouchableCancel: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  backgroudPlus: {
+    marginHorizontal: 20,
+    paddingVertical: 15,
+    backgroundColor: '#28a745',
+    alignItems: 'center',
+    borderRadius: 5,
+  },
+  textPlus: {
+    color: 'white',
+    fontSize: 20,
+  },
+  backgroundHeader: {
+    marginTop: 10,
+  },
+  textStyleEn: {
+    height: 50,
+    borderColor: 'black',
+    borderWidth: 1,
+    margin: 10,
+    fontSize: 20,
+    paddingHorizontal: 20,
+  },
+  textStyleVn: {
+    height: 50,
+    borderColor: 'black',
+    borderWidth: 1,
+    margin: 10,
+    fontSize: 20,
+    paddingHorizontal: 20,
+  },
+});

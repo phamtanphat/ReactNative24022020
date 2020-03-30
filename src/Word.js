@@ -1,37 +1,57 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
 
 export default class Word extends Component {
-  render() {
-    // cach 1 lay gia tri tu 1 object
-    // const en = this.props.word.en;
-    // const vn = this.props.word.vn;
-    // cach 2 dung destructuring
-    const {en, vn, isMemorized} = this.props.word;
+  renderItemFlatlist = item => {
+    if (this.props.filterMode === 'Show_Forgot' && !item.isMemorized) {
+      return null;
+    } else if (this.props.filterMode === 'Show_Memorized' && item.isMemorized) {
+      return null;
+    }
     return (
-      <View style={styles.container}>
+      <View style={styles.containerGroupWord} key={item.id}>
         <View style={styles.groupText}>
-          <Text style={styles.textEn}>{en}</Text>
-          <Text style={styles.textVn}>{isMemorized ? '----' : vn}</Text>
+          <Text style={styles.textEn}>{item.en}</Text>
+          <Text style={styles.textVn}>
+            {item.isMemorized ? '----' : item.vn}
+          </Text>
         </View>
         <View style={styles.groupButton}>
-          <TouchableOpacity style={styles.buttonMemorized(isMemorized)}>
+          <TouchableOpacity
+            onPress={() => this.toggleMemorized(item.id)}
+            style={styles.buttonMemorized(item.isMemorized)}>
             <Text style={styles.textMemorized}>
-              {isMemorized ? 'Forgot' : 'Memorized'}
+              {item.isMemorized ? 'Forgot' : 'Memorized'}
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonRemove}>
+          <TouchableOpacity
+            onPress={() => this.removeWord(item.id)}
+            style={styles.buttonRemove}>
             <Text style={styles.textRemove}>Remove</Text>
           </TouchableOpacity>
         </View>
       </View>
     );
+  };
+  render() {
+    return (
+      <FlatList
+        ref={ref => {
+          this.flatlist = ref;
+        }}
+        scrollEnabled={false}
+        data={this.props.words}
+        renderItem={({item}) => this.renderItemFlatlist(item)}
+        keyExtractor={item => item.id}
+        extraData={this.props.words}
+      />
+    );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  containerGroupWord: {
     justifyContent: 'space-between',
     marginVertical: 10,
     borderRadius: 10,
