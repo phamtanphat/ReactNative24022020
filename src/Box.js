@@ -9,18 +9,17 @@ export default class Box extends Component {
     this.state = {
       count: 0,
     };
-    console.log('Constructor');
   }
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log('shouldComponentUpdate');
-    return true;
-  }
-  getSnapshotBeforeUpdate(prevProps, prevState) {
-    console.log(prevState);
-    console.log('getSnapshotBeforeUpdate');
-  }
+  onIncrease = count => {
+    this.setState({count: count + 1});
+  };
+  onDescrease = count => {
+    this.setState({count: count - 1});
+  };
+  onReset = () => {
+    this.setState({count: 0});
+  };
   render() {
-    console.log('render Box');
     return (
       <View
         style={{
@@ -29,18 +28,16 @@ export default class Box extends Component {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <TouchableOpacity
-          onPress={() => this.setState({count: this.state.count + 1})}>
-          <Text style={{color: 'red', fontSize: 40}}>
-            Count : {this.state.count}
-          </Text>
-        </TouchableOpacity>
-
-        <Child />
+        <Text style={{color: 'red', fontSize: 40}}>
+          Count : {this.state.count}
+        </Text>
+        <Child
+          onDescrease={this.onDescrease}
+          onIncrease={this.onIncrease}
+          onReset={this.onReset}
+          count={this.state.count}
+        />
       </View>
     );
-  }
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log('componentDidUpdate');
   }
 }

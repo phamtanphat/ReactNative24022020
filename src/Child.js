@@ -1,23 +1,17 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {Component} from 'react';
+import React, {Component, PureComponent} from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
 
-export default class Child extends Component {
+export default class Child extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       text: '',
     };
   }
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.state.text === nextState.text) {
-      return false;
-    } else {
-      return true;
-    }
-  }
   render() {
     console.log('render child');
+    const {onIncrease, count, onReset, onDescrease} = this.props;
     return (
       <View
         style={{
@@ -26,7 +20,7 @@ export default class Child extends Component {
           justifyContent: 'space-evenly',
         }}>
         <TouchableOpacity
-          onPress={this.increase}
+          onPress={() => onIncrease(count)}
           style={{backgroundColor: 'green', padding: 10}}>
           <Text
             style={{color: 'white', fontStyle: 'italic', fontWeight: 'bold'}}>
@@ -34,7 +28,7 @@ export default class Child extends Component {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={this.decrease}
+          onPress={() => onDescrease(count)}
           style={{backgroundColor: 'red', padding: 10}}>
           <Text
             style={{color: 'white', fontStyle: 'italic', fontWeight: 'bold'}}>
@@ -42,7 +36,7 @@ export default class Child extends Component {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={this.reset}
+          onPress={() => onReset()}
           style={{backgroundColor: 'slategray', padding: 10}}>
           <Text
             style={{color: 'white', fontStyle: 'italic', fontWeight: 'bold'}}>
