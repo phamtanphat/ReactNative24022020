@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {Component} from 'react';
+import React, {Component, PureComponent} from 'react';
 import {
   Text,
   KeyboardAvoidingView,
@@ -8,14 +8,29 @@ import {
   View,
   StyleSheet,
 } from 'react-native';
-export default class Form extends Component {
+export default class Form extends PureComponent {
   constructor(props) {
     super(props);
     this.txtEn = '';
     this.txtVn = '';
   }
+  addWord = () => {
+    const {words, onAddword} = this.props;
+    const newWord = {
+      id: words.length + 1 + '',
+      en: this.txtEn,
+      vn: this.txtVn,
+      isMemorized: false,
+    };
+    const newWords = Object.assign([], words);
+    newWords.splice(0, 0, newWord);
+    this.txtVn = '';
+    this.txtEn = '';
+    onAddword(newWords);
+  };
   renderForm = () => {
-    if (this.props.shouldShowform) {
+    const {onToggleForm, shouldShowform, words, onAddword} = this.props;
+    if (shouldShowform) {
       return (
         <View>
           <TextInput
@@ -30,12 +45,12 @@ export default class Form extends Component {
           />
           <View style={styles.containerButtonForm}>
             <TouchableOpacity
-              onPress={this.addword}
+              onPress={() => this.addWord()}
               style={styles.backgroudAddWord}>
               <Text style={styles.textTouchableAddWord}>Add word</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => this.toggleForm()}
+              onPress={() => onToggleForm(!shouldShowform)}
               style={styles.backgroudCancel}>
               <Text style={styles.textTouchableCancel}>Cancel</Text>
             </TouchableOpacity>
@@ -45,7 +60,7 @@ export default class Form extends Component {
     } else {
       return (
         <TouchableOpacity
-          onPress={() => this.toggleForm()}
+          onPress={() => onToggleForm(!shouldShowform)}
           style={styles.backgroudPlus}>
           <Text style={styles.textPlus}>+</Text>
         </TouchableOpacity>
