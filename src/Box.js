@@ -2,23 +2,10 @@
 import React, {Component} from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
 import Child from './Child';
+import {connect} from 'react-redux';
 
-export default class Box extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      count: 0,
-    };
-  }
-  onIncrease = count => {
-    this.setState({count: count + 1});
-  };
-  onDescrease = count => {
-    this.setState({count: count - 1});
-  };
-  onReset = () => {
-    this.setState({count: 0});
-  };
+class Box extends Component {
+ 
   render() {
     return (
       <View
@@ -29,15 +16,16 @@ export default class Box extends Component {
           alignItems: 'center',
         }}>
         <Text style={{color: 'red', fontSize: 40}}>
-          Count : {this.state.count}
+          Count : {this.props.count}
         </Text>
-        <Child
-          onDescrease={this.onDescrease}
-          onIncrease={this.onIncrease}
-          onReset={this.onReset}
-          count={this.state.count}
-        />
+        <Child />
       </View>
     );
   }
 }
+
+const mapStateToprops = function(state) {
+  return {count: state};
+};
+
+export default connect(mapStateToprops)(Box);

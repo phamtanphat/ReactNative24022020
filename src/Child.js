@@ -1,17 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component, PureComponent} from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
+import {connect} from 'react-redux';
 
-export default class Child extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      text: '',
-    };
-  }
+class Child extends PureComponent {
   render() {
-    console.log('render child');
-    const {onIncrease, count, onReset, onDescrease} = this.props;
     return (
       <View
         style={{
@@ -20,7 +13,7 @@ export default class Child extends PureComponent {
           justifyContent: 'space-evenly',
         }}>
         <TouchableOpacity
-          onPress={() => onIncrease(count)}
+          onPress={() => this.props.dispatch({type: 'INCREMENT'})}
           style={{backgroundColor: 'green', padding: 10}}>
           <Text
             style={{color: 'white', fontStyle: 'italic', fontWeight: 'bold'}}>
@@ -28,7 +21,7 @@ export default class Child extends PureComponent {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => onDescrease(count)}
+          onPress={() => this.props.dispatch({type: 'DECREMENT'})}
           style={{backgroundColor: 'red', padding: 10}}>
           <Text
             style={{color: 'white', fontStyle: 'italic', fontWeight: 'bold'}}>
@@ -36,7 +29,7 @@ export default class Child extends PureComponent {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => onReset()}
+          onPress={() => this.props.dispatch({type: 'RESET'})}
           style={{backgroundColor: 'slategray', padding: 10}}>
           <Text
             style={{color: 'white', fontStyle: 'italic', fontWeight: 'bold'}}>
@@ -47,3 +40,5 @@ export default class Child extends PureComponent {
     );
   }
 }
+
+export default connect(mapStateToprops)(Child);

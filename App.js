@@ -7,16 +7,33 @@ import List from './src/List';
 import MyFlatlist from './src/MyFlatlist';
 import Form from './src/Form';
 import Filter from './src/Filter';
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
+
+const store = createStore((state = 0, action) => {
+  if (action.type === 'INCREMENT') {
+    return state + 1;
+  }
+  if (action.type === 'DECREMENT') {
+    return state - 1;
+  }
+  if (action.type === 'RESET') {
+    return 0;
+  }
+  return state;
+});
 
 export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <List />
+        {/* <List /> */}
         {/* <MyFlatlist /> */}
         {/* <Form/> */}
         {/* <Filter /> */}
-        {/* <Box /> */}
+        <Provider store={store}>
+          <Box />
+        </Provider>
       </View>
     );
   }
