@@ -23,10 +23,10 @@ export default class List extends Component {
         {id: '10', en: 'Ten', vn: 'Muoi', isMemorized: true},
       ],
       shouldShowform: false,
-      filterMode: 'Show_All',
+      filtermode: 'Show_All',
     };
   }
-  toggleMemorized = id => {
+  onToggleMemorized = id => {
     const newWords = this.state.words.map(item => {
       if (item.id === id) {
         return {...item, isMemorized: !item.isMemorized};
@@ -35,7 +35,7 @@ export default class List extends Component {
     });
     this.setState({words: newWords});
   };
-  removeWord = id => {
+  onRemoveWord = id => {
     const newWords = this.state.words.filter(item => item.id !== id);
     this.setState({words: newWords});
   };
@@ -44,6 +44,9 @@ export default class List extends Component {
   };
   onAddword = words => {
     this.setState({words, shouldShowform: false});
+  };
+  onFilterMode = filtermode => {
+    this.setState({filtermode});
   };
   render() {
     return (
@@ -54,8 +57,16 @@ export default class List extends Component {
           shouldShowform={this.state.shouldShowform}
           onToggleForm={this.onToggleForm}
         />
-        <Filter filterMode={this.state.filterMode} />
-        <Word words={this.state.words} filterMode={this.state.filterMode} />
+        <Filter
+          filtermode={this.state.filtermode}
+          onFilterMode={this.onFilterMode}
+        />
+        <Word
+          onRemoveWord={this.onRemoveWord}
+          onToggleMemorized={this.onToggleMemorized}
+          words={this.state.words}
+          filtermode={this.state.filtermode}
+        />
       </ScrollView>
     );
   }

@@ -2,14 +2,20 @@ import React, {Component} from 'react';
 import {Picker, StyleSheet, View} from 'react-native';
 
 export default class Filter extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      filterSelected: '',
+    };
+  }
   render() {
     return (
       <View style={styles.containerPickerStyle}>
         <Picker
-          selectedValue={this.props.filterMode}
+          selectedValue={this.props.filtermode}
           style={styles.pickerStyle}
           onValueChange={itemValue => {
-            this.setState({filterMode: itemValue});
+            this.props.onFilterMode(itemValue);
           }}>
           <Picker.Item label="Show All" value="Show_All" />
           <Picker.Item label="Show Forgot" value="Show_Forgot" />

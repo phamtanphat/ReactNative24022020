@@ -4,9 +4,9 @@ import {Text, View, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
 
 export default class Word extends Component {
   renderItemFlatlist = item => {
-    if (this.props.filterMode === 'Show_Forgot' && !item.isMemorized) {
+    if (this.props.filtermode === 'Show_Forgot' && !item.isMemorized) {
       return null;
-    } else if (this.props.filterMode === 'Show_Memorized' && item.isMemorized) {
+    } else if (this.props.filtermode === 'Show_Memorized' && item.isMemorized) {
       return null;
     }
     return (
@@ -19,14 +19,14 @@ export default class Word extends Component {
         </View>
         <View style={styles.groupButton}>
           <TouchableOpacity
-            onPress={() => this.toggleMemorized(item.id)}
+            onPress={() => this.props.onToggleMemorized(item.id)}
             style={styles.buttonMemorized(item.isMemorized)}>
             <Text style={styles.textMemorized}>
               {item.isMemorized ? 'Forgot' : 'Memorized'}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => this.removeWord(item.id)}
+            onPress={() => this.props.onRemoveWord(item.id)}
             style={styles.buttonRemove}>
             <Text style={styles.textRemove}>Remove</Text>
           </TouchableOpacity>
