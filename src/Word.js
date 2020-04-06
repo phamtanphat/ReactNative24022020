@@ -36,6 +36,7 @@ class Word extends Component {
     );
   };
   render() {
+    console.log("render word");
     return (
       <FlatList
         ref={ref => {

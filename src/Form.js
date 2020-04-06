@@ -30,8 +30,11 @@ class Form extends PureComponent {
     this.txtEn = '';
     onAddword(newWords);
   };
+  toggleForm = shouldShowform => {
+    this.props.dispatch({type: 'ON_TOGGLE_FORM', shouldShowform});
+  };
   renderForm = () => {
-    const {onToggleForm, shouldShowform, words, onAddword} = this.props;
+    const {shouldShowform} = this.props;
     if (shouldShowform) {
       return (
         <View>
@@ -52,7 +55,7 @@ class Form extends PureComponent {
               <Text style={styles.textTouchableAddWord}>Add word</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => onToggleForm(!shouldShowform)}
+              onPress={() => this.toggleForm(!shouldShowform)}
               style={styles.backgroudCancel}>
               <Text style={styles.textTouchableCancel}>Cancel</Text>
             </TouchableOpacity>
@@ -62,7 +65,7 @@ class Form extends PureComponent {
     } else {
       return (
         <TouchableOpacity
-          onPress={() => onToggleForm(!shouldShowform)}
+          onPress={() => this.toggleForm(!shouldShowform)}
           style={styles.backgroudPlus}>
           <Text style={styles.textPlus}>+</Text>
         </TouchableOpacity>
@@ -70,6 +73,7 @@ class Form extends PureComponent {
     }
   };
   render() {
+    console.log("render form");
     return (
       <KeyboardAvoidingView behavior="height">
         {this.renderForm()}

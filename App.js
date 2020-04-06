@@ -28,6 +28,9 @@ const defaultStore = {
 };
 
 const store = createStore((state = defaultStore, action) => {
+  if (action.type === 'ON_TOGGLE_FORM') {
+    return {...state, shouldShowform: action.shouldShowform};
+  }
   return state;
 });
 
@@ -35,10 +38,6 @@ export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {/* <List /> */}
-        {/* <MyFlatlist /> */}
-        {/* <Form/> */}
-        {/* <Filter /> */}
         <Provider store={store}>
           <List />
         </Provider>

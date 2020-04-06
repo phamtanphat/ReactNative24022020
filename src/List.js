@@ -29,6 +29,7 @@ class List extends Component {
     this.setState({filtermode});
   };
   render() {
+    console.log("render list");
     return (
       <ScrollView style={styles.container}>
         <Form />

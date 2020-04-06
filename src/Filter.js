@@ -10,6 +10,7 @@ class Filter extends Component {
     };
   }
   render() {
+    console.log("render filter");
     return (
       <View style={styles.containerPickerStyle}>
         <Picker
