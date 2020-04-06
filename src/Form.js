@@ -8,7 +8,9 @@ import {
   View,
   StyleSheet,
 } from 'react-native';
-export default class Form extends PureComponent {
+import {connect} from 'react-redux';
+
+class Form extends PureComponent {
   constructor(props) {
     super(props);
     this.txtEn = '';
@@ -133,3 +135,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
 });
+
+const mapStateToProps = function(state) {
+  return {shouldShowform: state.shouldShowform};
+};
+export default connect(mapStateToProps)(Form);

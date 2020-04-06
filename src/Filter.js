@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {Picker, StyleSheet, View} from 'react-native';
+import {connect} from 'react-redux';
 
-export default class Filter extends Component {
+class Filter extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -38,3 +39,9 @@ const styles = StyleSheet.create({
     height: 50,
   },
 });
+
+const mapStateToProps = function(state) {
+  return {filtermode: state.filtermode};
+};
+
+export default connect(mapStateToProps)(Filter);
