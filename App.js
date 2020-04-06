@@ -9,6 +9,7 @@ import Form from './src/Form';
 import Filter from './src/Filter';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
+import { act } from 'react-test-renderer';
 
 const defaultStore = {
   words: [
@@ -33,6 +34,15 @@ const store = createStore((state = defaultStore, action) => {
   }
   if (action.type === 'ON_ADD_WORD') {
     return {...state, shouldShowform: false, words: action.words};
+  }
+  if (action.type === 'ON_REMOVE_WORD') {
+    return {...state, words: action.words};
+  }
+  if (action.type === 'ON_TOGGLE_WORD') {
+    return {...state, words: action.words};
+  }
+  if (action.type === 'ON_SET_FILTER_MODE') {
+    return {...state, filtermode: action.filtermode};
   }
   return state;
 });

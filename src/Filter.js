@@ -3,21 +3,21 @@ import {Picker, StyleSheet, View} from 'react-native';
 import {connect} from 'react-redux';
 
 class Filter extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      filterSelected: '',
-    };
-  }
+  onFilterMode = filtermode => {
+    this.setState({filtermode});
+  };
   render() {
-    console.log("render filter");
+    console.log('render filter');
     return (
       <View style={styles.containerPickerStyle}>
         <Picker
           selectedValue={this.props.filtermode}
           style={styles.pickerStyle}
           onValueChange={itemValue => {
-            this.props.onFilterMode(itemValue);
+            this.props.dispatch({
+              type: 'ON_SET_FILTER_MODE',
+              filtermode: itemValue,
+            });
           }}>
           <Picker.Item label="Show All" value="Show_All" />
           <Picker.Item label="Show Forgot" value="Show_Forgot" />
