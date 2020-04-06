@@ -41,4 +41,4 @@ class Child extends PureComponent {
   }
 }
 
-export default connect(mapStateToprops)(Child);
+export default connect()(Child);

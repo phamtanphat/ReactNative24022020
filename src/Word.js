@@ -1,8 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
+import {connect} from 'react-redux';
 
-export default class Word extends Component {
+class Word extends Component {
   renderItemFlatlist = item => {
     if (this.props.filtermode === 'Show_Forgot' && !item.isMemorized) {
       return null;
@@ -95,3 +96,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
 });
+
+const mapStateToProps = function(state) {
+  return {words: state.words, filtermode: state.filtermode};
+};
+export default connect(mapStateToProps)(Word);

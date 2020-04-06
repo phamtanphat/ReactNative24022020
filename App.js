@@ -10,16 +10,24 @@ import Filter from './src/Filter';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 
-const store = createStore((state = 0, action) => {
-  if (action.type === 'INCREMENT') {
-    return state + 1;
-  }
-  if (action.type === 'DECREMENT') {
-    return state - 1;
-  }
-  if (action.type === 'RESET') {
-    return 0;
-  }
+const defaultStore = {
+  words: [
+    {id: '1', en: 'One', vn: 'Mot', isMemorized: true},
+    {id: '2', en: 'Two', vn: 'Hai', isMemorized: false},
+    {id: '3', en: 'Three', vn: 'Ba', isMemorized: false},
+    {id: '4', en: 'Four', vn: 'Bon', isMemorized: false},
+    {id: '5', en: 'Five', vn: 'Nam', isMemorized: false},
+    {id: '6', en: 'Six', vn: 'Sau', isMemorized: true},
+    {id: '7', en: 'Seven', vn: 'Bay', isMemorized: false},
+    {id: '8', en: 'Eight', vn: 'Tam', isMemorized: true},
+    {id: '9', en: 'Nine', vn: 'Chin', isMemorized: false},
+    {id: '10', en: 'Ten', vn: 'Muoi', isMemorized: true},
+  ],
+  shouldShowform: false,
+  filtermode: 'Show_All',
+};
+
+const store = createStore((state = defaultStore, action) => {
   return state;
 });
 
@@ -32,7 +40,7 @@ export default class App extends Component {
         {/* <Form/> */}
         {/* <Filter /> */}
         <Provider store={store}>
-          <Box />
+          <List />
         </Provider>
       </View>
     );

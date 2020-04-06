@@ -5,7 +5,6 @@ import Child from './Child';
 import {connect} from 'react-redux';
 
 class Box extends Component {
- 
   render() {
     return (
       <View
