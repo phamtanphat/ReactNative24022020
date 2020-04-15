@@ -6,7 +6,7 @@ import Form from './Form';
 import {connect} from 'react-redux';
 class List extends Component {
   componentDidMount() {
-    const url = 'https://server2301.herokuapp.com/word/';
+    
    
   }
   render() {

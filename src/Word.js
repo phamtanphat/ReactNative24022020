@@ -5,6 +5,9 @@ import {connect} from 'react-redux';
 import actioncreator from './redux/action/actioncreator';
 
 class Word extends Component {
+  componentDidMount = () => {
+    this.props.fetchAllWords();
+  };
   removeWord = id => {
     const newWords = this.props.words.filter(item => item.id !== id);
     this.props.onRemoveWord(newWords);
