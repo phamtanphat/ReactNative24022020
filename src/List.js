@@ -4,24 +4,13 @@ import Word from './Word';
 import Filter from './Filter';
 import Form from './Form';
 import {connect} from 'react-redux';
-
 class List extends Component {
- 
-  onRemoveWord = id => {
-    const newWords = this.state.words.filter(item => item.id !== id);
-    this.setState({words: newWords});
-  };
-  onToggleForm = shouldShowform => {
-    this.setState({shouldShowform});
-  };
-  onAddword = words => {
-    this.setState({words, shouldShowform: false});
-  };
-  onFilterMode = filtermode => {
-    this.setState({filtermode});
-  };
+  componentDidMount() {
+    const url = 'https://server2301.herokuapp.com/word/';
+   
+  }
   render() {
-    console.log("render list");
+    console.log('render list');
     return (
       <ScrollView style={styles.container}>
         <Form />

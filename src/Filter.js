@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Picker, StyleSheet, View} from 'react-native';
 import {connect} from 'react-redux';
+import actioncreator from './redux/action/actioncreator';
 
 class Filter extends Component {
   onFilterMode = filtermode => {
@@ -13,12 +14,7 @@ class Filter extends Component {
         <Picker
           selectedValue={this.props.filtermode}
           style={styles.pickerStyle}
-          onValueChange={itemValue => {
-            this.props.dispatch({
-              type: 'ON_SET_FILTER_MODE',
-              filtermode: itemValue,
-            });
-          }}>
+          onValueChange={itemValue => this.props.onSetFilterMode(itemValue)}>
           <Picker.Item label="Show All" value="Show_All" />
           <Picker.Item label="Show Forgot" value="Show_Forgot" />
           <Picker.Item label="Show Memorized" value="Show_Memorized" />
@@ -45,4 +41,7 @@ const mapStateToProps = function(state) {
   return {filtermode: state.filtermode};
 };
 
-export default connect(mapStateToProps)(Filter);
+export default connect(
+  mapStateToProps,
+  actioncreator,
+)(Filter);

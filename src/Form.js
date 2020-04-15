@@ -9,6 +9,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import {connect} from 'react-redux';
+import actioncreator from './redux/action/actioncreator';
 
 class Form extends PureComponent {
   constructor(props) {
@@ -28,10 +29,10 @@ class Form extends PureComponent {
     newWords.splice(0, 0, newWord);
     this.txtVn = '';
     this.txtEn = '';
-    this.props.dispatch({type: 'ON_ADD_WORD', words: newWords});
+    this.props.onAddWord(newWords);
   };
   toggleForm = shouldShowform => {
-    this.props.dispatch({type: 'ON_TOGGLE_FORM', shouldShowform});
+    this.props.onToggleForm(shouldShowform);
   };
   renderForm = () => {
     const {shouldShowform} = this.props;
@@ -73,7 +74,7 @@ class Form extends PureComponent {
     }
   };
   render() {
-    console.log("render form");
+    console.log('render form');
     return (
       <KeyboardAvoidingView behavior="height">
         {this.renderForm()}
@@ -143,4 +144,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = function(state) {
   return {words: state.words, shouldShowform: state.shouldShowform};
 };
-export default connect(mapStateToProps)(Form);
+export default connect(
+  mapStateToProps,
+  actioncreator,
+)(Form);
