@@ -9,8 +9,7 @@ class Word extends Component {
     this.props.fetchAllWords();
   };
   removeWord = _id => {
-    const newWords = this.props.words.filter(item => item._id !== _id);
-    this.props.onRemoveWord(newWords);
+    this.props.onRemoveWord(_id);
   };
   toggleWord = (_id, isMemorized) => {
     this.props.onToggleWord(_id, isMemorized);

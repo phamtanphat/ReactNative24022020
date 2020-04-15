@@ -18,18 +18,9 @@ class Form extends PureComponent {
     this.txtVn = '';
   }
   addWord = () => {
-    const {words} = this.props;
-    const newWord = {
-      _id: words.length + 1 + '',
-      en: this.txtEn,
-      vn: this.txtVn,
-      isMemorized: false,
-    };
-    const newWords = Object.assign([], words);
-    newWords.splice(0, 0, newWord);
+    this.props.onAddWord(this.txtEn, this.txtVn);
     this.txtVn = '';
     this.txtEn = '';
-    this.props.onAddWord(newWords);
   };
   toggleForm = shouldShowform => {
     this.props.onToggleForm(shouldShowform);

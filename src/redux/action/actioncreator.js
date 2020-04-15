@@ -3,24 +3,36 @@ import axios from 'axios';
 
 const url = 'https://server2301.herokuapp.com/word/';
 
-function onRemoveWord(words) {
-  return {type: actiontype.ON_REMOVE_WORD, words};
+function onRemoveWord(_id) {
+  return (dispatch) => {
+    axios
+    .delete(url + _id )
+    .then(response => {
+      dispatch({type : actiontype.ON_REMOVE_WORD, word: response.data.w})
+    })
+    .catch(error => console.log(error))
+  }
 }
 
 function onToggleWord(_id , isMemorized) {
   return (dispatch) => {
     axios
-    .put(url + _id , {
-      data: {isMemorized}
-    })
-    
+    .put(url + _id , {isMemorized})
     .then(response => {
       dispatch({type : actiontype.ON_TOGGLE_WORD, word: response.data.w})
     })
+    .catch(error => console.log(error))
   }
 }
-function onAddWord(words) {
-  return {type: actiontype.ON_ADD_WORD, words};
+function onAddWord(en , vn) {
+  return (dispatch) => {
+    axios
+    .post(url , {en , vn} )
+    .then(response => {
+      dispatch({type : actiontype.ON_ADD_WORD, word: response.data.word})
+    })
+    .catch(error => console.log(error))
+  }
 }
 function onToggleForm(shouldShowform) {
   return {type: actiontype.ON_TOGGLE_FORM, shouldShowform};
