@@ -20,7 +20,7 @@ class Form extends PureComponent {
   addWord = () => {
     const {words} = this.props;
     const newWord = {
-      id: words.length + 1 + '',
+      _id: words.length + 1 + '',
       en: this.txtEn,
       vn: this.txtVn,
       isMemorized: false,

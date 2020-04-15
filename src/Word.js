@@ -8,18 +8,12 @@ class Word extends Component {
   componentDidMount = () => {
     this.props.fetchAllWords();
   };
-  removeWord = id => {
-    const newWords = this.props.words.filter(item => item.id !== id);
+  removeWord = _id => {
+    const newWords = this.props.words.filter(item => item._id !== _id);
     this.props.onRemoveWord(newWords);
   };
-  toggleWord = id => {
-    const newWords = this.props.words.map(item => {
-      if (item.id === id) {
-        return {...item, isMemorized: !item.isMemorized};
-      }
-      return item;
-    });
-    this.props.onToggleWord(newWords);
+  toggleWord = (_id, isMemorized) => {
+    this.props.onToggleWord(_id, isMemorized);
   };
   renderItemFlatlist = item => {
     if (this.props.filtermode === 'Show_Forgot' && !item.isMemorized) {
@@ -28,7 +22,7 @@ class Word extends Component {
       return null;
     }
     return (
-      <View style={styles.containerGroupWord} key={item.id}>
+      <View style={styles.containerGroupWord} key={item._id}>
         <View style={styles.groupText}>
           <Text style={styles.textEn}>{item.en}</Text>
           <Text style={styles.textVn}>
@@ -37,14 +31,14 @@ class Word extends Component {
         </View>
         <View style={styles.groupButton}>
           <TouchableOpacity
-            onPress={() => this.toggleWord(item.id)}
+            onPress={() => this.toggleWord(item._id, !item.isMemorized)}
             style={styles.buttonMemorized(item.isMemorized)}>
             <Text style={styles.textMemorized}>
               {item.isMemorized ? 'Forgot' : 'Memorized'}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => this.removeWord(item.id)}
+            onPress={() => this.removeWord(item._id)}
             style={styles.buttonRemove}>
             <Text style={styles.textRemove}>Remove</Text>
           </TouchableOpacity>
@@ -62,7 +56,7 @@ class Word extends Component {
         scrollEnabled={false}
         data={this.props.words}
         renderItem={({item}) => this.renderItemFlatlist(item)}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item._id}
         extraData={this.props.words}
       />
     );

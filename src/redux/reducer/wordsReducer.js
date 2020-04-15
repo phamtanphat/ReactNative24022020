@@ -8,7 +8,13 @@ export default function wordsReducer(state = defaultWords, action) {
     return action.words;
   }
   if (action.type === 'ON_TOGGLE_WORD') {
-    return action.words;
+    const newWords = state.map(word => {
+      if (word.id === action.word._id) {
+        return {...word, isMemorized: action.word.isMemorized};
+      }
+      return word;
+    });
+    return newWords;
   }
   if (action.type === 'FETCH_DATA_WORDS') {
     return action.words;

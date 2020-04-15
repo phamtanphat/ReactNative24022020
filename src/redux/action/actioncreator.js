@@ -7,8 +7,17 @@ function onRemoveWord(words) {
   return {type: actiontype.ON_REMOVE_WORD, words};
 }
 
-function onToggleWord(words) {
-  return {type: actiontype.ON_TOGGLE_WORD, words};
+function onToggleWord(_id , isMemorized) {
+  return (dispatch) => {
+    axios
+    .put(url + _id , {
+      data: {isMemorized}
+    })
+    
+    .then(response => {
+      dispatch({type : actiontype.ON_TOGGLE_WORD, word: response.data.w})
+    })
+  }
 }
 function onAddWord(words) {
   return {type: actiontype.ON_ADD_WORD, words};
