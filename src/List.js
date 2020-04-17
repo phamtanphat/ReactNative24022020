@@ -1,14 +1,10 @@
 import React, {Component} from 'react';
-import {StyleSheet, ScrollView} from 'react-native';
+import {StyleSheet, ScrollView, ActivityIndicator, View} from 'react-native';
 import Word from './Word';
 import Filter from './Filter';
 import Form from './Form';
 import {connect} from 'react-redux';
 class List extends Component {
-  componentDidMount() {
-    
-   
-  }
   render() {
     console.log('render list');
     return (
@@ -23,7 +19,8 @@ class List extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    width: '100%',
+    height: '100%',
     marginTop: 10,
   },
   containerButtonForm: {

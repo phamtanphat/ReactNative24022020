@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   View,
   StyleSheet,
+  ActivityIndicator,
 } from 'react-native';
 import {connect} from 'react-redux';
 import actioncreator from './redux/action/actioncreator';
@@ -16,6 +17,9 @@ class Form extends PureComponent {
     super(props);
     this.txtEn = '';
     this.txtVn = '';
+    this.state = {
+      isLoading: false,
+    };
   }
   addWord = () => {
     this.props.onAddWord(this.txtEn, this.txtVn);
