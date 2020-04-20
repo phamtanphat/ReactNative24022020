@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
 import {connect} from 'react-redux';
 import actioncreator from './redux/action/actioncreator';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 class Word extends Component {
   componentDidMount = () => {
@@ -39,7 +40,10 @@ class Word extends Component {
           <TouchableOpacity
             onPress={() => this.removeWord(item._id)}
             style={styles.buttonRemove}>
-            <Text style={styles.textRemove}>Remove</Text>
+            <Text style={styles.textRemove}>
+              Remove
+              <Icon name="remove" size={30} color="#900" />
+            </Text>
           </TouchableOpacity>
         </View>
       </View>

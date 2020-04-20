@@ -28,7 +28,7 @@ class RootComponent extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {width: '100%' , height : '100%', position: 'absolute'},
+  container: {width: '100%', height: '100%', position: 'absolute'},
 });
 
 const mapStateToProps = function(state) {
