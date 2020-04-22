@@ -15,6 +15,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import ScreenA from './src/screen/ScreenA';
 import {createStackNavigator} from '@react-navigation/stack';
 import ScreenB from './src/screen/ScreenB';
+import Parent from './src/hooks/Parent';
 
 const Stack = createStackNavigator();
 
@@ -25,12 +26,13 @@ export default class App extends Component {
         {/* <Provider store={store}>
           <RootComponent />
         </Provider> */}
-        <NavigationContainer>
+        {/* <NavigationContainer>
           <Stack.Navigator initialRouteName="ScreenA">
             <Stack.Screen name="ScreenA" component={ScreenA} />
             <Stack.Screen name="ScreenB" component={ScreenB} />
           </Stack.Navigator>
-        </NavigationContainer>
+        </NavigationContainer> */}
+        <Parent />
       </View>
     );
   }
